@@ -21,6 +21,7 @@ type slashHandler struct {
 }
 
 func (h slashHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	log.Println("[INFO] /slash")
 	verifier, err := slack.NewSecretsVerifier(r.Header, h.signingSecret)
 	if err != nil {
 		log.Println(err)

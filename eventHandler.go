@@ -19,6 +19,7 @@ type eventHandler struct {
 }
 
 func (h eventHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	log.Println("[INFO] /event")
 	buf := new(bytes.Buffer)
 	_, _ = buf.ReadFrom(r.Body)
 	body := buf.String()
