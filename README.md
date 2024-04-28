@@ -21,6 +21,7 @@ When `NG` button is pressed, bot nominate a member randomly again.
     - chat:write
     - groups:read
     - incoming-webhook
+    - users:read
 -  Invite bot user to your channel.
 
 ## Run
@@ -35,6 +36,5 @@ export SIGNING_SECRET="***"  // you can get this after enable interactive messag
 To run this, 
 
 ```bash
-$ dep ensure
 $ go build -o bot && ./bot
 ```
