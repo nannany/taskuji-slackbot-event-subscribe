@@ -44,12 +44,6 @@ func (h slashHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	switch s.Command {
 	case "/gacha":
-		if err != nil {
-			log.Println(err)
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
-
 		if len(strings.Trim(s.Text, "")) == 0 {
 			members, err := h.memberCollector.Collect(s.ChannelID)
 			if err != nil {
