@@ -8,10 +8,9 @@ Implementatin is based on [go-slack-interactive](https://github.com/tcnksm/go-sl
 Mention bot user name then bot nominate a member in the channel randomly.
 Press `OK` button if the member can do the task, otherwise press `NG` buttton.
 When `NG` button is pressed, bot nominate a member randomly again.
-![Usage](demo.gif)
 
 ## Preparation in Slack
--  [Create Slack App as internal integrations](https://api.slack.com/internal-integrations)
+-  [Create Slack App as internal integrations](https://api.slack.com/start/quickstart#creating)
 -  Turn on `Bots`
 -  Turn on `Interactivity` and set `Request URL` : `{scheme}://{host}/interaction` 
 -  Turn on `Event Subscriptions`

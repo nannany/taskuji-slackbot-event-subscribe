@@ -11,7 +11,7 @@ type MemberCollector struct {
 	client *slack.Client
 }
 
-// Collect channnel members using slack api.
+// Collect channel members using slack api.
 func (c *MemberCollector) Collect(channelID string) ([]Member, error) {
 	members, err := c.fetchConversationMembers(channelID)
 	if err != nil {
