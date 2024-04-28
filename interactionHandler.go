@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
@@ -36,8 +35,8 @@ func (h interactionHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	r.Body = ioutil.NopCloser(io.TeeReader(r.Body, &verifier))
-	buf, err := ioutil.ReadAll(r.Body)
+	r.Body = io.NopCloser(io.TeeReader(r.Body, &verifier))
+	buf, err := io.ReadAll(r.Body)
 	if err != nil {
 		log.Printf("[ERROR] Failed to read request body: %s", err)
 		w.WriteHeader(http.StatusInternalServerError)
@@ -51,7 +50,7 @@ func (h interactionHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var message slack.AttachmentActionCallback
+	var message slack.InteractionCallback
 	if err := json.Unmarshal([]byte(jsonStr), &message); err != nil {
 		log.Printf("[ERROR] Failed to decode json message from slack: %s", jsonStr)
 		w.WriteHeader(http.StatusInternalServerError)
@@ -62,7 +61,7 @@ func (h interactionHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	h.reply(action, message, w)
 }
 
-func (h interactionHandler) reply(action *slack.AttachmentAction, message slack.AttachmentActionCallback, w http.ResponseWriter) {
+func (h interactionHandler) reply(action *slack.AttachmentAction, message slack.InteractionCallback, w http.ResponseWriter) {
 	switch action.Name {
 	case actionAccept:
 		winnerResponsed := fmt.Sprintf("<@%s>", message.User.ID) == message.OriginalMessage.Text
