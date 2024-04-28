@@ -20,7 +20,7 @@ type eventHandler struct {
 
 func (h eventHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	buf := new(bytes.Buffer)
-	buf.ReadFrom(r.Body)
+	_, _ = buf.ReadFrom(r.Body)
 	body := buf.String()
 
 	event, err := slackevents.ParseEvent(
@@ -39,7 +39,7 @@ func (h eventHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusInternalServerError)
 		}
 		w.Header().Set("Content-Type", "text")
-		w.Write([]byte(r.Challenge))
+		_, _ = w.Write([]byte(r.Challenge))
 	}
 
 	if event.Type == slackevents.CallbackEvent {
@@ -50,7 +50,7 @@ func (h eventHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			if err != nil {
 				log.Printf("[ERROR] Failed to collect member request: %s", err)
 			}
-			h.lot.DrawLots(ev.Channel, members, "")
+			_ = h.lot.DrawLots(ev.Channel, members, "")
 		}
 	}
 }
