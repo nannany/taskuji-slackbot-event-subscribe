@@ -43,20 +43,15 @@ type Member struct {
 	Name string
 }
 
-// MemberList to assign task
-type MemberList struct {
-	members []Member
-}
-
 func init() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 }
 
 func main() {
-	os.Exit(_main(os.Args[1:]))
+	os.Exit(_main())
 }
 
-func _main(args []string) int {
+func _main() int {
 	var env envConfig
 	if err := envconfig.Process("", &env); err != nil {
 		log.Printf("[ERROR] Failed to process env var: %s", err)
