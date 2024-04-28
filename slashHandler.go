@@ -51,7 +51,7 @@ func (h slashHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				_, _ = w.Write([]byte("require invite bot to this channel if here is not public channel"))
 				return
 			}
-			h.lot.DrawLots(s.ChannelID, members, "")
+			_ = h.lot.DrawLots(s.ChannelID, members, "")
 			return
 		}
 
@@ -84,7 +84,7 @@ func (h slashHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			_, _, _ = h.slackClient.PostMessage(s.ChannelID, slack.MsgOptionText(fmt.Sprintf("%s draw gacha @%s", s.UserName, groupName), true))
 		}
 
-		h.lot.DrawLots(s.ChannelID, members, ugID)
+		_ = h.lot.DrawLots(s.ChannelID, members, ugID)
 	default:
 		w.WriteHeader(http.StatusInternalServerError)
 		return

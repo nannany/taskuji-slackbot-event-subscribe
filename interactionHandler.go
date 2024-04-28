@@ -92,7 +92,7 @@ func (h interactionHandler) reply(action *slack.AttachmentAction, message slack.
 				targetMembers = append(targetMembers, member)
 			}
 		}
-		h.lot.DrawLots(message.Channel.ID, targetMembers, userGroupID)
+		_ = h.lot.DrawLots(message.Channel.ID, targetMembers, userGroupID)
 		return
 	default:
 		log.Printf("[ERROR] ]Invalid action was submitted: %s", action.Name)
