@@ -48,6 +48,10 @@ type MemberList struct {
 	members []Member
 }
 
+func init() {
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
+}
+
 func main() {
 	os.Exit(_main(os.Args[1:]))
 }
