@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"regexp"
@@ -29,7 +28,7 @@ func (h slashHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	r.Body = ioutil.NopCloser(io.TeeReader(r.Body, &verifier))
+	r.Body = io.NopCloser(io.TeeReader(r.Body, &verifier))
 	s, err := slack.SlashCommandParse(r)
 	if err != nil {
 		log.Println(err)
