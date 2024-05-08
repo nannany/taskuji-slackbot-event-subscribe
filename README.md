@@ -19,6 +19,7 @@ When `NG` button is pressed, bot nominate a member randomly again.
     - groups:read
     - incoming-webhook
     - users:read
+    - usergroups:read 
 -  Invite bot user to your channel.
 
 ## Run
