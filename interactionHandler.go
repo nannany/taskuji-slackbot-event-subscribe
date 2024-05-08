@@ -80,7 +80,7 @@ func (h interactionHandler) reply(action *slack.AttachmentAction, message slack.
 		userGroupID := action.Value
 		var members []Member
 		if len(userGroupID) > 0 {
-			members, _ = h.memberCollector.CollectByUserGroup(userGroupID, message.Channel.ID)
+			members, _ = h.memberCollector.CollectByUserGroup(userGroupID)
 		} else {
 			members, _ = h.memberCollector.Collect(message.Channel.ID)
 		}

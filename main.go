@@ -78,13 +78,6 @@ func _main() int {
 		messageTemplate: messageTemplate,
 	})
 
-	http.Handle("/event", eventHandler{
-		slackClient:       client,
-		verificationToken: env.VerificationToken,
-		lot:               lot,
-		memberCollector:   memberCollector,
-	})
-
 	http.Handle("/slash", slashHandler{
 		slackClient:     client,
 		signingSecret:   env.SigningSecret,

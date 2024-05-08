@@ -22,6 +22,7 @@ type slashHandler struct {
 
 func (h slashHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	log.Println("[INFO] /slash")
+	// slackのリクエストが正当なものかを検証
 	verifier, err := slack.NewSecretsVerifier(r.Header, h.signingSecret)
 	if err != nil {
 		log.Println(err)
@@ -46,12 +47,7 @@ func (h slashHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch s.Command {
 	case "/gacha":
 		if len(strings.Trim(s.Text, "")) == 0 {
-			members, err := h.memberCollector.Collect(s.ChannelID)
-			if err != nil {
-				_, _ = w.Write([]byte("require invite bot to this channel if here is not public channel"))
-				return
-			}
-			_ = h.lot.DrawLots(s.ChannelID, members, "")
+			_, _ = w.Write([]byte("can not find usergroup.  This usually works: /gacha [@usergroup]"))
 			return
 		}
 
@@ -62,7 +58,7 @@ func (h slashHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		ugID := idMatch[0][1]
-		members, err := h.memberCollector.CollectByUserGroup(ugID, s.ChannelID)
+		members, err := h.memberCollector.CollectByUserGroup(ugID)
 		if err != nil {
 			_, _ = w.Write([]byte("require invite bot to this channel if here is not public channel"))
 			return
