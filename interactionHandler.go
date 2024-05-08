@@ -82,7 +82,9 @@ func (h interactionHandler) reply(action *slack.AttachmentAction, message slack.
 		if len(userGroupID) > 0 {
 			members, _ = h.memberCollector.CollectByUserGroup(userGroupID)
 		} else {
-			members, _ = h.memberCollector.Collect(message.Channel.ID)
+			log.Println("[ERROR] ]No userGroupID was found")
+			w.WriteHeader(http.StatusInternalServerError)
+			return
 		}
 
 		targetMembers := make([]Member, 0)
