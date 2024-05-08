@@ -13,9 +13,6 @@ When `NG` button is pressed, bot nominate a member randomly again.
 -  [Create Slack App as internal integrations](https://api.slack.com/start/quickstart#creating)
 -  Turn on `Bots`
 -  Turn on `Interactivity` and set `Request URL` : `{scheme}://{host}/interaction` 
--  Turn on `Event Subscriptions`
-    - Set `Request URL` : `{scheme}://{host}/event` 
-    - Add `Subscribe to bot events` : `app_mention` 
 -  Add Permissions
     - channels:read
     - chat:write
