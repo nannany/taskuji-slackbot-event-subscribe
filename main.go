@@ -1,12 +1,11 @@
 package main
 
 import (
+	"github.com/kelseyhightower/envconfig"
+	"github.com/slack-go/slack"
 	"log"
 	"net/http"
 	"os"
-
-	"github.com/kelseyhightower/envconfig"
-	"github.com/slack-go/slack"
 )
 
 // https://api.slack.com/slack-apps
